@@ -1,0 +1,268 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  --color-canvas: #faf9f6;
+  --color-surface: #ffffff;
+  --color-sand: #f3f1ec;
+  --color-ink: #17161c;
+  --color-ink-soft: #2b2a33;
+  --color-muted: #6b6975;
+  --color-subtle: #9a98a3;
+  --color-line: #e9e6e0;
+  --color-line-strong: #d9d5cd;
+
+  --color-brand: #6d5bd0;
+  --color-brand-dark: #5544b8;
+  --color-brand-soft: #efebfb;
+  --color-brand-tint: #b9a8e8;
+
+  --color-success: #2f8f5b;
+  --color-success-soft: #e7f4ec;
+  --color-warning: #b9741a;
+  --color-warning-soft: #fbf1e1;
+  --color-danger: #c93f3f;
+  --color-danger-soft: #fbe9e9;
+  --color-info: #3c6fb0;
+  --color-info-soft: #e7eff9;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(23 22 28 / 0.04), 0 8px 24px -12px rgb(23 22 28 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(23 22 28 / 0.04), 0 24px 48px -20px rgb(23 22 28 / 0.22);
+  --shadow-glow: 0 18px 40px -18px rgb(109 91 208 / 0.55);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 46s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite;
+  --animate-aurora-alt: aurora-alt 22s ease-in-out infinite;
+  --animate-gradient-x: gradient-x 6s ease infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  @keyframes shimmer {
+    from { background-position: -400px 0; }
+    to { background-position: 400px 0; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes aurora {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(8%, -6%) scale(1.12); }
+    66% { transform: translate(-6%, 8%) scale(0.94); }
+  }
+  @keyframes aurora-alt {
+    0%, 100% { transform: translate(0, 0) scale(1.05); }
+    50% { transform: translate(-10%, -8%) scale(0.9); }
+  }
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes shine {
+    from { transform: translateX(-120%) skewX(-20deg); }
+    to { transform: translateX(260%) skewX(-20deg); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  ::selection {
+    @apply bg-brand-tint/60 text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  img {
+    @apply select-none;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-10;
+  }
+  .eyebrow {
+    @apply text-[11px] font-bold tracking-[0.22em] text-muted uppercase;
+  }
+  .display {
+    @apply font-extrabold tracking-[-0.035em] leading-[0.98];
+  }
+  .serif-accent {
+    @apply font-serif font-normal italic tracking-[-0.01em];
+  }
+  .card {
+    @apply rounded-3xl border border-line bg-surface shadow-soft;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #efede8 0px, #f7f6f3 120px, #efede8 240px);
+    background-size: 800px 100%;
+    @apply animate-shimmer rounded-xl;
+  }
+  .link-underline {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.35s var(--ease-out-expo);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  /* Animated gradient text for accent words */
+  .text-shimmer {
+    background-image: linear-gradient(100deg, #6d5bd0 10%, #b9a8e8 35%, #e2557a 55%, #6d5bd0 85%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    @apply animate-gradient-x;
+  }
+  /* Light sweep across buttons on hover */
+  .btn-shine {
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    inset: -2px auto -2px 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent);
+    transform: translateX(-120%) skewX(-20deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .btn-shine:hover::after {
+    animation: shine 0.9s var(--ease-out-expo);
+  }
+  /* Soft blurred aurora blobs used behind hero sections */
+  .aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.55;
+    pointer-events: none;
+    will-change: transform;
+  }
+  /* Faint film grain to keep large gradients from looking flat */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Faint grid behind the hero */
+  .bg-grid {
+    background-image: linear-gradient(to right, rgb(23 22 28 / 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgb(23 22 28 / 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+  }
+  /* Outlined display text for the kinetic band */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(23 22 28 / 0.22);
+  }
+  .prose-policy h2 {
+    @apply mt-10 mb-3 text-xl font-bold tracking-tight;
+  }
+  .prose-policy p,
+  .prose-policy li {
+    @apply leading-7 text-muted;
+  }
+  .prose-policy ul {
+    @apply my-3 list-disc space-y-1.5 pl-5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Swiper pagination in brand colours */
+.swiper-pagination-bullet {
+  background: var(--color-ink) !important;
+  opacity: 0.25 !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  width: 22px !important;
+  border-radius: 99px !important;
+  transition: width 0.3s;
+}
+
+/* Bubbles rising through the best-sellers section */
+@keyframes rise {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.9; }
+  50% { transform: translateY(-50vh) translateX(14px) scale(1); }
+  100% { transform: translateY(-110vh) translateX(-10px) scale(1.1); opacity: 0; }
+}
+
+/* Moving highlight stripes on liquid progress fills */
+.liquid-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(110deg, transparent 0 30%, rgb(255 255 255 / 0.55) 45%, transparent 60%);
+  background-size: 200% 100%;
+  animation: liquid-sheen 2.6s linear infinite;
+}
+@keyframes liquid-sheen {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}

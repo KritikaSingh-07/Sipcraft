@@ -1,0 +1,45 @@
+{
+  "name": "sipcraft-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sipcraft — premium tumbler & sipper e-commerce API",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "seed": "node seed/seed.js",
+    "seed:destroy": "node seed/seed.js --destroy",
+    "seed:catalog": "node seed/catalog.js",
+    "seed:demo": "node seed/demo.js",
+    "test": "node --test --test-concurrency=1 \"tests/**/*.test.js\""
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.11.0",
+    "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
+    "express": "^4.22.3",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.1",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0",
+    "nodemailer": "^10.0.16",
+    "razorpay": "^2.9.8",
+    "slugify": "^1.6.9",
+    "xss": "^1.0.15",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.3.1"
+  }
+}
